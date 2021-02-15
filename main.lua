@@ -11,16 +11,16 @@ function love.load()
     objects.ground = {}
   -- Marken är en rektangel som utgår från centrum vilket gör att jag tar 450/2, 450-50/2 för att få den längre ner
     objects.ground.body = love.physics.newBody(world, 450/2, 450-50/2)
-  -- Här skapas en rektangel med bredden 450 och höjden 50
+  -- Här skapas en rektangel med bredden 1000 och höjden 10 (px)
     objects.ground.shape = love.physics.newRectangleShape(1000, 10)
   -- Det här sätter ihop rektangeln med bodyn
     objects.ground.fixture = love.physics.newFixture(objects.ground.body,objects.ground.shape)
 
   -- Här skapas en boll
   objects.ball = {}
-  -- Detta palcerar bollen i centrum
+  -- Detta placerar bollen i centrum
   objects.ball.body = love.physics.newBody(world, 650/2, 450/2, "dynamic")
-  -- Boll med radien 20
+  -- Boll med radien 20px
   objects.ball.shape = love.physics.newCircleShape(20)
   -- Det här lägger till i bodyn och 1 på slutet ger den bollen densiteten 1
   objects.ball.fixture = love.physics.newFixture(objects.ball.body,objects.ball.shape, 1)
