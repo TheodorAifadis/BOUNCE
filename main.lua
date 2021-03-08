@@ -42,10 +42,19 @@ function love.load()
   objects.ball.fixture = love.physics.newFixture(objects.ball.body, objects.ball.shape, 1) -- densitet
   objects.ball.fixture:setRestitution(1) -- studskoefficient
 
+  objects.enemy = {}
+  objects.enemy.body = love.physics.newBody(world, 400, 300, "dynamic")
+  objects.enemy.shape = love.physics.newCircleShape(20) -- radie
+  objects.enemy.fixture = love.physics.newFixture(objects.enemy.body, objects.enemy.shape, 1) -- densitet
+  objects.enemy.fixture:setRestitution(.25) -- studskoefficient
+
+  --[[
   objects.triangle = {}
-  objects.triangle.body = love.physics.newBody(world, 300, 0, "dynamic")
+  objects.triangle.body = love.physics.newBody(world, 400, 0, "dynamic")
   objects.triangle.shape = love.physics.newPolygonShape(30, 30, 90, 30, 30, 90)
   objects.triangle.fixture = love.physics.newFixture(objects.triangle.body, objects.triangle.shape, 1)
+--]]
+
  --[[
   objects.triangle.begin_contact = function (self)
     objects.triangle.fixture:destroy()
@@ -83,8 +92,14 @@ function love.draw()
   love.graphics.setColor(0, .1, 0)
   love.graphics.polygon("fill", objects.ground.body:getWorldPoints(objects.ground.shape:getPoints()))
 
+  --[[
   love.graphics.setColor(1, 0, 0)
   love.graphics.polygon("fill", objects.triangle.body:getWorldPoints(objects.triangle.shape:getPoints()))
+--]]
+
+
+love.graphics.setColor(1, 0, 0)
+love.graphics.circle("fill", objects.enemy.body:getX(), objects.enemy.body:getY(), objects.enemy.shape:getRadius())
 
   love.graphics.setColor(1, 1, 1)
   love.graphics.circle("fill", objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.shape:getRadius())
