@@ -1,5 +1,7 @@
 gameOver = false
 greenFont = {0, 1, 0, 1}
+bigFont = love.graphics.newFont("Stick-Regular.ttf", 100)
+smallFont = love.graphics.newFont("Stick-Regular.ttf", 25)
 enemies = 9
 enemyPosition = {}
 enemiesSpawned = {}
@@ -67,15 +69,10 @@ function love.update(dt)
       end
     end
     for i = 1, #enemyPosition do 
-      if checkCollission(player.fixture, enemyPosition[i].fixture) then
-        gameOver = true
-      end
-    
-    for i = 1, #enemyPosition do 
-      if checkCollission(enemyPosition[i].fixture, ground.fixture) then
-        enemyPosition[i] = table.remove(enemyPosition, i)
-      end
-    end
+     if checkCollission(player.fixture, enemyPosition[i].fixture) then
+       gameOver = true
+     end
+     
   end
 
   function love.keypressed(k)
@@ -90,7 +87,10 @@ end
 
 function love.draw()
   if (gameOver) then
-    love.graphics.print({greenFont, ("R TO RESTART")}, 290, 300)
+    love.graphics.print({greenFont, ("GAME")}, bigFont, 190, 150)
+    love.graphics.print({greenFont, ("OVER")}, bigFont , 203, 250)
+    love.graphics.print({greenFont, ("R TO RESTART")}, smallFont, 253, 400)
+    love.graphics.print({greenFont, ("ESC TO EXIT")}, smallFont, 266, 450)
     return
 end
   
