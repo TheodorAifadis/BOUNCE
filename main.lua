@@ -13,16 +13,6 @@ function love.load()
   ground.shape = love.physics.newRectangleShape(650, 50)
   ground.fixture = love.physics.newFixture(ground.body, ground.shape)
 
-  leftWall = {}
-  leftWall.body = love.physics.newBody(world, 1, 650-50/2)
-  leftWall.shape = love.physics.newRectangleShape(50, 1300)
-  leftWall.fixture = love.physics.newFixture(leftWall.body, leftWall.shape)
-
-  rightWall = {}
-  rightWall.body = love.physics.newBody(world, 649, 650-50/2)
-  rightWall.shape = love.physics.newRectangleShape(50, 1300)
-  rightWall.fixture = love.physics.newFixture(rightWall.body, rightWall.shape)
-
   player = {}
   player.body = love.physics.newBody(world, 650/2, 650/2, "dynamic")
   player.shape = love.physics.newCircleShape(20) -- radie
@@ -50,6 +40,16 @@ function love.update(dt)
     player.body:applyForce(400, 0)
   elseif love.keyboard.isDown("left") then 
     player.body:applyForce(-400, 0)
+  end
+
+  playerPosition = player.body:getX( )
+
+  if playerPosition < 0 then
+    player.body.setX(player.body, 650)
+  end
+
+  if playerPosition > 650 then
+    player.body.setX(player.body, 0)
   end
 
   enemiesSpawned = 0
@@ -93,12 +93,6 @@ function love.draw()
     love.graphics.print({greenFont, ("R TO RESTART")}, 290, 300)
     return
 end
-  
-  love.graphics.setColor(.1, 0, 0)
-  love.graphics.polygon("fill", leftWall.body:getWorldPoints(leftWall.shape:getPoints()))
-
-  love.graphics.setColor(.1, 0, 0)
-  love.graphics.polygon("fill", rightWall.body:getWorldPoints(rightWall.shape:getPoints()))
   
   love.graphics.setColor(.1, 0, 0)
   love.graphics.polygon("fill", ground.body:getWorldPoints(ground.shape:getPoints()))
