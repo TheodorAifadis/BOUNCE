@@ -1,106 +1,116 @@
+gameOver = false
+greenFont = {0, 1, 0, 1}
+enemies = 9
+enemyPosition = {}
+enemiesSpawned = {}
+
 function love.load()
   love.physics.setMeter(64)
   world = love.physics.newWorld(0, 9.82*64, true)
 
---[[
-  local begin_contact_callback = function (fixture_a, fixture_b, contact)
-    local objects_a = fixture_a:getUserData()
-    local objects_b = fixture_b:getUserData()
-    if objects_a.begin_contact then objects_a:begin_contact() end
-    if objects_b.begin_contact then objects_b:begin_contact() end
-  end
+  ground = {}
+  ground.body = love.physics.newBody(world, 650/2, 650-50/2)
+  ground.shape = love.physics.newRectangleShape(650, 50)
+  ground.fixture = love.physics.newFixture(ground.body, ground.shape)
 
-  
-  world:setCallbacks(
-    begin_contact_callback,
-    nil,
-    nil,
-    nil
-  )
---]]
- 
-  objects = {}  
+  leftWall = {}
+  leftWall.body = love.physics.newBody(world, 1, 650-50/2)
+  leftWall.shape = love.physics.newRectangleShape(50, 1300)
+  leftWall.fixture = love.physics.newFixture(leftWall.body, leftWall.shape)
 
-  objects.ground = {}
-  objects.ground.body = love.physics.newBody(world, 650/2, 650-50/2)
-  objects.ground.shape = love.physics.newRectangleShape(650, 50)
-  objects.ground.fixture = love.physics.newFixture(objects.ground.body, objects.ground.shape)
+  rightWall = {}
+  rightWall.body = love.physics.newBody(world, 649, 650-50/2)
+  rightWall.shape = love.physics.newRectangleShape(50, 1300)
+  rightWall.fixture = love.physics.newFixture(rightWall.body, rightWall.shape)
 
-  objects.leftWall = {}
-  objects.leftWall.body = love.physics.newBody(world, 1, 650-50/2)
-  objects.leftWall.shape = love.physics.newRectangleShape(50, 1300)
-  objects.leftWall.fixture = love.physics.newFixture(objects.leftWall.body, objects.leftWall.shape)
-
-  objects.rightWall = {}
-  objects.rightWall.body = love.physics.newBody(world, 649, 650-50/2)
-  objects.rightWall.shape = love.physics.newRectangleShape(50, 1300)
-  objects.rightWall.fixture = love.physics.newFixture(objects.rightWall.body, objects.rightWall.shape)
-
-  objects.ball = {}
-  objects.ball.body = love.physics.newBody(world, 650/2, 650/2, "dynamic")
-  objects.ball.shape = love.physics.newCircleShape(20) -- radie
-  objects.ball.fixture = love.physics.newFixture(objects.ball.body, objects.ball.shape, 1) -- densitet
-  objects.ball.fixture:setRestitution(1) -- studskoefficient
-
-  objects.enemy = {}
-  objects.enemy.body = love.physics.newBody(world, 400, 300, "dynamic")
-  objects.enemy.shape = love.physics.newCircleShape(20) -- radie
-  objects.enemy.fixture = love.physics.newFixture(objects.enemy.body, objects.enemy.shape, 1) -- densitet
-  objects.enemy.fixture:setRestitution(.25) -- studskoefficient
-
-  --[[
-  objects.triangle = {}
-  objects.triangle.body = love.physics.newBody(world, 400, 0, "dynamic")
-  objects.triangle.shape = love.physics.newPolygonShape(30, 30, 90, 30, 30, 90)
-  objects.triangle.fixture = love.physics.newFixture(objects.triangle.body, objects.triangle.shape, 1)
---]]
-
- --[[
-  objects.triangle.begin_contact = function (self)
-    objects.triangle.fixture:destroy()
-  end
---]]
+  player = {}
+  player.body = love.physics.newBody(world, 650/2, 650/2, "dynamic")
+  player.shape = love.physics.newCircleShape(20) -- radie
+  player.fixture = love.physics.newFixture(player.body, player.shape, 1) -- densitet
+  player.fixture:setRestitution(1) -- studskoefficient
 
   love.graphics.setBackgroundColor(0, 0, 0)
   love.window.setMode(650, 650)
 end
 
+function checkCollission(fixture1, fixture2)
+  if love.physics.getDistance(fixture1,fixture2) == 0 then
+    return true
+  end
+end
+
 function love.update(dt)
   world:update(dt)
 
+  if gameOver then
+    return 
+  end
+
   if love.keyboard.isDown("right") then 
-    objects.ball.body:applyForce(400, 0)
+    player.body:applyForce(400, 0)
   elseif love.keyboard.isDown("left") then 
-    objects.ball.body:applyForce(-400, 0)
+    player.body:applyForce(-400, 0)
   end
 
-function love.keypressed(k)
-  if k == 'escape' then
-    love.event.quit()
+  enemiesSpawned = 0
+  for i = 1, #enemyPosition do enemiesSpawned = enemiesSpawned + 1 end
+    i = enemiesSpawned
+  if enemiesSpawned < enemies then
+    while i <= enemies do
+      ball = {}
+      ball.body = love.physics.newBody(world, math.random(6, 600), math.random(-50, -500), "dynamic")
+      ball.shape = love.physics.newCircleShape(20) -- radie
+      ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1) -- densitet
+      ball.fixture:setRestitution(math.random(1, 1.5)) -- studskoefficient
+      enemyPosition[i] = ball
+        i = i + 1
+      end
+    end
+    for i = 1, #enemyPosition do 
+      if checkCollission(player.fixture, enemyPosition[i].fixture) then
+        gameOver = true
+      end
+    
+    for i = 1, #enemyPosition do 
+      if checkCollission(enemyPosition[i].fixture, ground.fixture) then
+        enemyPosition[i] = table.remove(enemyPosition, i)
+      end
+    end
   end
-end
 
+  function love.keypressed(k)
+    if k == 'escape' then
+      love.event.quit()
+    end
+    if k == "r" then 
+      love.event.quit("restart") 
+    end
+  end
 end
 
 function love.draw()
-  love.graphics.setColor(.1, 0, 0)
-  love.graphics.polygon("fill", objects.leftWall.body:getWorldPoints(objects.leftWall.shape:getPoints()))
-
-  love.graphics.setColor(.1, 0, 0)
-  love.graphics.polygon("fill", objects.rightWall.body:getWorldPoints(objects.rightWall.shape:getPoints()))
+  if (gameOver) then
+    love.graphics.print({greenFont, ("R TO RESTART")}, 290, 300)
+    return
+end
   
-  love.graphics.setColor(0, .1, 0)
-  love.graphics.polygon("fill", objects.ground.body:getWorldPoints(objects.ground.shape:getPoints()))
+  love.graphics.setColor(.1, 0, 0)
+  love.graphics.polygon("fill", leftWall.body:getWorldPoints(leftWall.shape:getPoints()))
 
-  --[[
+  love.graphics.setColor(.1, 0, 0)
+  love.graphics.polygon("fill", rightWall.body:getWorldPoints(rightWall.shape:getPoints()))
+  
+  love.graphics.setColor(.1, 0, 0)
+  love.graphics.polygon("fill", ground.body:getWorldPoints(ground.shape:getPoints()))
+
   love.graphics.setColor(1, 0, 0)
-  love.graphics.polygon("fill", objects.triangle.body:getWorldPoints(objects.triangle.shape:getPoints()))
---]]
+  love.graphics.circle("fill", ball.body:getX(), ball.body:getY(), ball.shape:getRadius())
 
-
-love.graphics.setColor(1, 0, 0)
-love.graphics.circle("fill", objects.enemy.body:getX(), objects.enemy.body:getY(), objects.enemy.shape:getRadius())
+  for i = 1, #enemyPosition do
+    love.graphics.setColor(1, 0, 0)
+    love.graphics.circle("fill", enemyPosition[i].body:getX(), enemyPosition[i].body:getY(), enemyPosition[i].shape:getRadius())
+  end
 
   love.graphics.setColor(1, 1, 1)
-  love.graphics.circle("fill", objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.shape:getRadius())
+  love.graphics.circle("fill", player.body:getX(), player.body:getY(), player.shape:getRadius())
 end
