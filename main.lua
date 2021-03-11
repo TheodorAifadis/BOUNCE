@@ -72,9 +72,7 @@ function love.update(dt)
      if checkCollission(player.fixture, enemyPosition[i].fixture) then
        gameOver = true
      end
-     -- Fixa en liknande som ovan, där de röda bollarna försvinner när de kommer i kontakt med marken
-     
-  end
+    end
 
   function love.keypressed(k)
     if k == 'escape' then
