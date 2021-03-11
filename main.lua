@@ -2,7 +2,7 @@ gameOver = false
 greenFont = {0, 1, 0, 1}
 bigFont = love.graphics.newFont("Stick-Regular.ttf", 100)
 smallFont = love.graphics.newFont("Stick-Regular.ttf", 25)
-enemies = 9
+enemies = 10
 enemyPosition = {}
 enemiesSpawned = {}
 
@@ -60,7 +60,7 @@ function love.update(dt)
   if enemiesSpawned < enemies then
     while i <= enemies do
       ball = {}
-      ball.body = love.physics.newBody(world, math.random(6, 600), math.random(-50, -500), "dynamic")
+      ball.body = love.physics.newBody(world, math.random(50, 600), math.random(-50, -600), "dynamic")
       ball.shape = love.physics.newCircleShape(20) -- radie
       ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1) -- densitet
       ball.fixture:setRestitution(math.random(1, 1.5)) -- studskoefficient
@@ -72,6 +72,7 @@ function love.update(dt)
      if checkCollission(player.fixture, enemyPosition[i].fixture) then
        gameOver = true
      end
+     -- Fixa en liknande som ovan, där de röda bollarna försvinner när de kommer i kontakt med marken
      
   end
 
@@ -94,7 +95,7 @@ function love.draw()
     return
 end
   
-  love.graphics.setColor(.1, 0, 0)
+  love.graphics.setColor(0, .1, 0)
   love.graphics.polygon("fill", ground.body:getWorldPoints(ground.shape:getPoints()))
 
   love.graphics.setColor(1, 0, 0)
