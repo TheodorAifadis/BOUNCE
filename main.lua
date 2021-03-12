@@ -2,9 +2,10 @@ gameOver = false
 greenFont = {0, 1, 0, 1}
 bigFont = love.graphics.newFont("Stick-Regular.ttf", 100)
 smallFont = love.graphics.newFont("Stick-Regular.ttf", 25)
-enemies = 10
+enemies = 3
 enemyPosition = {}
 enemiesSpawned = {}
+math.randomseed(os.time())
 
 function love.load()
   love.physics.setMeter(64)
@@ -85,6 +86,10 @@ function love.update(dt)
 end
 
 function love.draw()
+  if gameOver == false then
+    love.graphics.print({greenFont, ("BOUNCE")}, bigFont, 125, 150)
+  end
+  
   if (gameOver) then
     love.graphics.print({greenFont, ("GAME")}, bigFont, 190, 150)
     love.graphics.print({greenFont, ("OVER")}, bigFont , 203, 250)
@@ -93,7 +98,7 @@ function love.draw()
     return
 end
   
-  love.graphics.setColor(0, .1, 0)
+  love.graphics.setColor(0, 1, 0)
   love.graphics.polygon("fill", ground.body:getWorldPoints(ground.shape:getPoints()))
 
   love.graphics.setColor(1, 0, 0)
