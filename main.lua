@@ -9,7 +9,7 @@ math.randomseed(os.time())
 
 function love.load()
   love.physics.setMeter(64)
-  world = love.physics.newWorld(0, 9.82*64, true)
+  world = love.physics.newWorld(0, 5*64, true)
 
   ground = {}
   ground.body = love.physics.newBody(world, 650/2, 650-50/2)
