@@ -1,8 +1,8 @@
 gameOver = false
 greenFont = {0, 1, 0, 1}
-bigFont = love.graphics.newFont("Stick-Regular.ttf", 100)
-smallFont = love.graphics.newFont("Stick-Regular.ttf", 25)
-enemies = 3
+bigFont = love.graphics.newFont("assets/Stick-Regular.ttf", 100)
+smallFont = love.graphics.newFont("assets/Stick-Regular.ttf", 25)
+enemies = 10
 enemyPosition = {}
 enemiesSpawned = {}
 math.randomseed(os.time())
@@ -64,7 +64,7 @@ function love.update(dt)
       ball.body = love.physics.newBody(world, math.random(50, 600), math.random(-50, -600), "dynamic")
       ball.shape = love.physics.newCircleShape(20) -- radie
       ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1) -- densitet
-      ball.fixture:setRestitution(math.random(1, 1.5)) -- studskoefficient
+      ball.fixture:setRestitution(1) -- studskoefficient
       enemyPosition[i] = ball
         i = i + 1
       end
@@ -89,14 +89,14 @@ function love.draw()
   if gameOver == false then
     love.graphics.print({greenFont, ("BOUNCE")}, bigFont, 125, 150)
   end
-  
+
   if (gameOver) then
     love.graphics.print({greenFont, ("GAME")}, bigFont, 190, 150)
     love.graphics.print({greenFont, ("OVER")}, bigFont , 203, 250)
     love.graphics.print({greenFont, ("R TO RESTART")}, smallFont, 253, 400)
     love.graphics.print({greenFont, ("ESC TO EXIT")}, smallFont, 266, 450)
     return
-end
+  end
   
   love.graphics.setColor(0, 1, 0)
   love.graphics.polygon("fill", ground.body:getWorldPoints(ground.shape:getPoints()))
