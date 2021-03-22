@@ -5,6 +5,7 @@ smallFont = love.graphics.newFont("assets/Stick-Regular.ttf", 25)
 enemies = 10
 enemyPosition = {}
 enemiesSpawned = {}
+score = 0
 math.randomseed(os.time())
 
 function love.load()
@@ -38,6 +39,8 @@ function love.update(dt)
   if gameOver then
     return 
   end
+
+  score = score + 1
 
   if love.keyboard.isDown("right") then 
     player.body:applyForce(400, 0)
@@ -86,6 +89,8 @@ function love.update(dt)
 end
 
 function love.draw()
+  love.graphics.print({greenFont, (score)}, smallFont, 50, 50)
+
   if gameOver == false then
     love.graphics.print({greenFont, ("BOUNCE")}, bigFont, 125, 150)
   end
