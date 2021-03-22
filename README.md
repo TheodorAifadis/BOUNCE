@@ -1,4 +1,4 @@
-MyFirstGame
+BOUNCE
 
 Hur ska spelet se ut?
     Boll som studsar som kan styras i sidleds av spelaren

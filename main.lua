@@ -2,9 +2,6 @@ gameOver = false
 greenFont = {0, 1, 0, 1}
 bigFont = love.graphics.newFont("assets/Stick-Regular.ttf", 100)
 smallFont = love.graphics.newFont("assets/Stick-Regular.ttf", 25)
-enemies = 10
-enemyPosition = {}
-enemiesSpawned = {}
 score = 0
 math.randomseed(os.time())
 
@@ -22,6 +19,12 @@ function love.load()
   player.shape = love.physics.newCircleShape(20) -- radie
   player.fixture = love.physics.newFixture(player.body, player.shape, 1) -- densitet
   player.fixture:setRestitution(1) -- studskoefficient
+
+  ball = {}
+      ball.body = love.physics.newBody(world, math.random(50, 600), math.random(-50, -600), "dynamic")
+      ball.shape = love.physics.newCircleShape(20) -- radie
+      ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1) -- densitet
+      ball.fixture:setRestitution(1) -- studskoefficient
 
   love.graphics.setBackgroundColor(0, 0, 0)
   love.window.setMode(650, 650)
@@ -58,25 +61,14 @@ function love.update(dt)
     player.body.setX(player.body, 0)
   end
 
-  enemiesSpawned = 0
-  for i = 1, #enemyPosition do enemiesSpawned = enemiesSpawned + 1 end
-    i = enemiesSpawned
-  if enemiesSpawned < enemies then
-    while i <= enemies do
-      ball = {}
-      ball.body = love.physics.newBody(world, math.random(50, 600), math.random(-50, -600), "dynamic")
-      ball.shape = love.physics.newCircleShape(20) -- radie
-      ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1) -- densitet
-      ball.fixture:setRestitution(1) -- studskoefficient
-      enemyPosition[i] = ball
-        i = i + 1
-      end
-    end
-    for i = 1, #enemyPosition do 
-     if checkCollission(player.fixture, enemyPosition[i].fixture) then
-       gameOver = true
-     end
-    end
+  
+  if checkCollission(player.fixture, ball.fixture) then
+   gameOver = true
+  end
+
+  if checkCollission(ball.fixture, ground.fixture) then
+    gameOver = true
+  end
 
   function love.keypressed(k)
     if k == 'escape' then
@@ -108,11 +100,6 @@ function love.draw()
 
   love.graphics.setColor(1, 0, 0)
   love.graphics.circle("fill", ball.body:getX(), ball.body:getY(), ball.shape:getRadius())
-
-  for i = 1, #enemyPosition do
-    love.graphics.setColor(1, 0, 0)
-    love.graphics.circle("fill", enemyPosition[i].body:getX(), enemyPosition[i].body:getY(), enemyPosition[i].shape:getRadius())
-  end
 
   love.graphics.setColor(1, 1, 1)
   love.graphics.circle("fill", player.body:getX(), player.body:getY(), player.shape:getRadius())
