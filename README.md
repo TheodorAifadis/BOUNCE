@@ -1,18 +1,17 @@
 BOUNCE
 
-Hur ska spelet se ut?
-    Boll som studsar som kan styras i sidleds av spelaren
-    Föremål som faller från himlen som ska undvikas
-
 Milstolpar:
-1 Skapa en plattform som bollen är på (skapa en body)       KLAR
-2 Få bollen att röra sig
-3 Lägg till objekt som faller
-4 Score / highscore
+- Det kör
+- Fysik
+- Man styr spelaren
+- Utseende av spelet
+- Knapptryck för att stänga ner eller starta om spelet
+- Gameover med gameover-skärm
+- Ljudeffekter
 
-Framgång veckovis:
-v.7 Skapat en plattform med massa
-v.8 När bollen kommer i kontakt med marken så studsar den upp igen
-    Bollen går att styras i sidleds
-    "Väggar", bollen försvinner inte från skärmen
-v.12 Lagt in en räknare, för poäng. Jag tog bort funktionen för att respawna de röda bollarna, den fungerade inte som jag ville.
+Todo:
+- Startskärm (tutorial?)
+- Paus
+- Musik
+- Försöka fixa buggen (om det inte är så att det beror på LÖVE2D och inte min kod)
+- "Städa rent koden" (dela upp i olika filer, indrag)
