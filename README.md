@@ -15,3 +15,4 @@ v.7 Skapat en plattform med massa
 v.8 När bollen kommer i kontakt med marken så studsar den upp igen
     Bollen går att styras i sidleds
     "Väggar", bollen försvinner inte från skärmen
+v.12 Lagt in en räknare, för poäng. Jag tog bort funktionen för att respawna de röda bollarna, den fungerade inte som jag ville.
