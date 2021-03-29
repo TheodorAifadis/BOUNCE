@@ -1,5 +1,3 @@
--- variables
-gameOver = false
 greenFont = {0, 1, 0, 1}
 bigFont = love.graphics.newFont("assets/Stick-Regular.ttf", 100)
 smallFont = love.graphics.newFont("assets/Stick-Regular.ttf", 25)
@@ -11,40 +9,14 @@ math.randomseed(os.time())
 function love.load()
   sleep = 0
 
-  -- physics, gravity
-  love.physics.setMeter(64)
-  world = love.physics.newWorld(0, 10*64, true)
+  ball = require('objects/ball')
+  ground = require('objects/ground')
+  player = require('objects/player')
 
-  -- the following are objects, to which i apply physics
-  ground = {}
-  ground.body = love.physics.newBody(world, 650/2, 650-50/2)
-  ground.shape = love.physics.newRectangleShape(650, 50)
-  ground.fixture = love.physics.newFixture(ground.body, ground.shape)
-
-  player = {}
-  player.body = love.physics.newBody(world, 650/2, 650/2, "dynamic")
-  player.shape = love.physics.newCircleShape(20) -- radius
-  player.fixture = love.physics.newFixture(player.body, player.shape, 1) -- density
-  player.fixture:setRestitution(1) -- bounce
-
-  function getBall()
-  ball = {}
-  ball.body = love.physics.newBody(world, math.random(50, 600), math.random(-50, -600), "dynamic")
-  ball.shape = love.physics.newCircleShape(20) -- radius
-  ball.fixture = love.physics.newFixture(ball.body, ball.shape, 0) -- density
-  return ball
-  end
-
-  ball1 = getBall()
-  ball2 = getBall()
-  ball3 = getBall()
-
-  -- backgroundcolor and window-size
   love.graphics.setBackgroundColor(0, 0, 0)
   love.window.setMode(650, 650)
 end
 
--- function used to check collision between two objects
 function checkCollission(fixture1, fixture2, distance)
   if love.physics.getDistance(fixture1,fixture2) < distance then
     return true
@@ -57,26 +29,21 @@ function love.update(dt)
   love.timer.sleep(sleep)
 
   if love.timer.getFPS()>60 then
-    sleep = sleep + 0.0001 --Make the sleep longer and longer until the user doesnt have more then 60 FPS.
+    sleep = sleep + 0.0001 
   end
 
-  -- if gameOver is true then the game ends
   if gameOver then
     return 
   end
 
-  -- the score is based on ticks
   score = score + 1
 
-  -- movement, based on applying force on the object (player in this case)
   if love.keyboard.isDown("right") then 
     player.body:applyForce(500, 0)
   elseif love.keyboard.isDown("left") then 
     player.body:applyForce(-500, 0)
   end
 
-  -- the following statements is made to send the ball to the other side of the screen when it gets 
-  -- out on the other side
   playerPosition = player.body:getX( )
   
   if playerPosition < 0 then
@@ -87,7 +54,6 @@ function love.update(dt)
     player.body.setX(player.body, 0)
   end
 
-  -- here i am using the checkCollission function to check if the ball touches the player and if so the game ends
   function destroyPlayer(ball)
     if checkCollission(player.fixture, ball.fixture, 1) then
       gameOver = true
@@ -120,7 +86,6 @@ function love.update(dt)
   respawnBall(ball2)
   respawnBall(ball3)
 
-  -- close and restart game keybinds
   function love.keypressed(k)
     if k == 'escape' then
       love.event.quit()
@@ -128,14 +93,18 @@ function love.update(dt)
     if k == "r" then 
       love.event.quit("restart") 
     end
+    if k == 'm' then
+      bounceSfx:setVolume(0)
+    end
+    if k == 'n' then
+      bounceSfx:setVolume(.5)
+    end
   end
 end
 
--- function for text and colors
 function love.draw()
   love.graphics.print({greenFont, ("SCORE:")}, smallFont, 25, 50)
   love.graphics.print({greenFont, (score)}, smallFont, 125, 50)
-
   
   if gameOver == false then
     love.graphics.print({greenFont, ("BOUNCE")}, bigFont, 125, 150)
