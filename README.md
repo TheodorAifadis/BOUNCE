@@ -15,3 +15,4 @@ Todo:
 - Musik
 - Försöka fixa buggen (om det inte är så att det beror på LÖVE2D och inte min kod)
 - "Städa rent koden" (dela upp i olika filer, indrag)
+- Öka svårighetsgraden med tiden (öka gravitationen)
