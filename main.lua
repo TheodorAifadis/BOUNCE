@@ -9,9 +9,11 @@ bounceSfx:setVolume(0.5)
 math.randomseed(os.time())
 
 function love.load()
+  sleep = 0
+
   -- physics, gravity
   love.physics.setMeter(64)
-  world = love.physics.newWorld(0, 9.84*64, true)
+  world = love.physics.newWorld(0, 10*64, true)
 
   -- the following are objects, to which i apply physics
   ground = {}
@@ -51,6 +53,12 @@ end
 
 function love.update(dt)
   world:update(dt)
+
+  love.timer.sleep(sleep)
+
+  if love.timer.getFPS()>60 then
+    sleep = sleep + 0.0001 --Make the sleep longer and longer until the user doesnt have more then 60 FPS.
+  end
 
   -- if gameOver is true then the game ends
   if gameOver then
@@ -125,7 +133,9 @@ end
 
 -- function for text and colors
 function love.draw()
-  love.graphics.print({greenFont, (score)}, smallFont, 50, 50)
+  love.graphics.print({greenFont, ("SCORE:")}, smallFont, 25, 50)
+  love.graphics.print({greenFont, (score)}, smallFont, 125, 50)
+
   
   if gameOver == false then
     love.graphics.print({greenFont, ("BOUNCE")}, bigFont, 125, 150)
