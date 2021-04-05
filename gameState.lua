@@ -1,3 +1,0 @@
-return {
-    gameOver = false
-}
