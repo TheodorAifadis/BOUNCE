@@ -50,7 +50,7 @@ function love.draw()
   elseif score > 1500 and score < 2000 then
     love.graphics.print({greenFont, ("Epic!")}, smallFont , 50, 100)
   elseif score > 2000 then 
-    love.graphics.print({greenFont, ("Pro Gamer")}, smallFont , 50, 100) 
+    love.graphics.print({greenFont, ("True Jedi")}, smallFont , 50, 100) 
   end
   
   love.graphics.setColor(0, 1, 0)

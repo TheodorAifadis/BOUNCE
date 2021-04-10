@@ -1,7 +1,6 @@
 function love.load()
-  world = love.physics.newWorld(0, 8.12*64, true) -- gravitationsvariabel * 1 meter i spelet (64px)
-                                                 -- 8,1 för att tajma studsarna med musiken
   love.physics.setMeter(64) -- 1 meter i spelet = 64px
+  world = love.physics.newWorld(0, 8.12*64, true) -- gravitationsvariabel * 1 meter i spelet (64px)
   
   ground = {}
   ground.body = love.physics.newBody(world, 650/2, 650-50/2)
@@ -13,16 +12,17 @@ function love.load()
   player.shape = love.physics.newCircleShape(20) -- radie
   player.fixture = love.physics.newFixture(player.body, player.shape, 1) -- densitet
   player.fixture:setRestitution(1) -- studskoefficient
-  
-  function getBall(x)
+
+  function getBall(y)
     ball = {}
-    ball.body = love.physics.newBody(world, math.random(0, 650), x, "dynamic")
-    ball.shape = love.physics.newCircleShape(19) -- radie
-    ball.fixture = love.physics.newFixture(ball.body, ball.shape, 0) -- densitet
+    ball.body = love.physics.newBody(world, math.random(0, 650), y, "kinematic")
+    ball.shape = love.physics.newCircleShape(25) -- radie
+    ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1) -- densitet
+    ball.body:setLinearVelocity(0, 500)
     return ball
   end
-  
-  -- antalet "ballX = getBall(Y)" så många bollar kommer att finnas
+
+  -- antalet "ballX = getBall(y)" så många bollar kommer att finnas
   ball1 = getBall(-100)
   ball2 = getBall(-200)
   ball3 = getBall(-300)

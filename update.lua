@@ -4,11 +4,10 @@ function love.update(dt)
     return
   end
     
-  world:update(dt) -- spelet, världen, uppdateras
-                   --denna måste stå under ovanstående if-sats för att gameOver och liknande ska fungera
-  
-  score = score + 1
-  
+  world:update(dt) -- denna måste stå under ovanstående if-sats för att gameOver och liknande ska fungera
+
+  score = score + 1 
+
   if love.keyboard.isDown("right") then 
     player.body:applyForce(500, 0) -- på grund av att jag använder mig utav love.physics 
                                    -- så förfölyttas bollen genom att placera kraft från en axel på bollen
@@ -28,7 +27,7 @@ function love.update(dt)
   --  med hjälp av den tidigare kollisionsfunktionen så fungerar denna på så sätt att om spelaren och en boll 
   -- "kolliderar" så är gameOver = true
   function endGame(ball)
-    if checkCollission(player.fixture, ball.fixture, 1) then
+    if checkCollission(player.fixture, ball.fixture, 5) then
       gameOver = true
     end
   end
@@ -53,16 +52,16 @@ function love.update(dt)
   end
   
   -- om bollen "kolliderar" med marken, studsar, så spelas ett studs-ljud upp
-  if checkCollission(player.fixture, ground.fixture, 10) then
+  if checkCollission(player.fixture, ground.fixture, 1) then
     playSound(bounceSfx)
   end
   
   -- om en röd boll "kolliderar" med marken så "respawnas" den
   -- den "respawnar" genom att flyttas upp till 100px ovanflr skärmen
-  function respawnBall(ball, score)
+  function respawnBall(ball)
     if checkCollission(ground.fixture, ball.fixture, 1) then
-      ball.body.setY(ball.body, -100)
-      ball.body.setX(ball.body, math.random(0, 50))
+      ball.body.setY(ball.body, -50)
+      ball.body.setX(ball.body, math.random(0, 650))
     end
   end
   
