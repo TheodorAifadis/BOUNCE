@@ -9,6 +9,8 @@ pauseGame = false
 tutorial = false
 mainMenu = true
 
+image = love.graphics.newImage("assets/true-jedi.png")
+
 greenFont = {0, 1, 0, 1}
 bigFont = love.graphics.newFont("assets/Stick-Regular.ttf", 100)
 smallFont = love.graphics.newFont("assets/Stick-Regular.ttf", 25)

@@ -2,69 +2,67 @@ function love.update(dt)
   if gameOver or pauseGame or tutorial or mainMenu then
     return
   end
-    
-  world:update(dt) 
+
+  world:update(dt)
 
   ball1.body:setLinearVelocity(0, 250 * x)
   ball2.body:setLinearVelocity(0, 250 * x)
   ball3.body:setLinearVelocity(0, 250 * x)
   ball4.body:setLinearVelocity(0, 250 * x)
   ball5.body:setLinearVelocity(0, 250 * x)
-  
-  if x < 25 then
-    x = x + 0.0005
-  end
 
-  score = score + 1 
+  x = x + 0.0005
 
-  if love.keyboard.isDown("right") then 
-    player.body:applyForce(500, 0) 
-  elseif love.keyboard.isDown("left") then 
+  score = score + 1
+
+  if love.keyboard.isDown("right") then
+    player.body:applyForce(500, 0)
+  elseif love.keyboard.isDown("left") then
     player.body:applyForce(-500, 0)
   end
-  
-  playerPosition = player.body:getX( ) 
-    
+
+  playerPosition = player.body:getX( )
+
   if playerPosition < 0 then
     player.body.setX(player.body, 650)
   elseif playerPosition > 650 then
     player.body.setX(player.body, 0)
   end
-  
+
   function endGame(ball)
-    if checkCollission(player.fixture, ball.fixture, 5) then
+    if checkCollission(player.fixture, ball.fixture, 7) then
       gameOver = true
     end
   end
-  
+
   endGame(ball1)
   endGame(ball2)
   endGame(ball3)
   endGame(ball4)
   endGame(ball5)
-  
+
   if gameOver == false then
     music:play()
   elseif gameOver == true then
     music:setVolume(0)
   end
-  
+
   function playSound(sound)
     sound:play()
     sound:setPitch(.85)
   end
-  
-  if checkCollission(player.fixture, ground.fixture, 2) then
+
+  if checkCollission(player.fixture, ground.fixture, 5) then
     playSound(bounceSfx)
   end
-  
+
   function respawnBall(ball)
     if checkCollission(ground.fixture, ball.fixture, 1) then
       ball.body.setY(ball.body, -50)
       ball.body.setX(ball.body, math.random(0, 650))
     end
   end
-  
+
   respawnBall(ball1)
   respawnBall(ball2)
   respawnBall(ball3)

@@ -1,23 +1,23 @@
 function love.load()
-  love.physics.setMeter(64) 
-  world = love.physics.newWorld(0, 8.12*64, true) 
-  
+  love.physics.setMeter(64)
+  world = love.physics.newWorld(0, 8*64, true)
+
   ground = {}
   ground.body = love.physics.newBody(world, 650/2, 650-50/2)
   ground.shape = love.physics.newRectangleShape(650, 50)
   ground.fixture = love.physics.newFixture(ground.body, ground.shape)
-  
+
   player = {}
   player.body = love.physics.newBody(world, 650/2, 650/2, "dynamic")
-  player.shape = love.physics.newCircleShape(20) 
+  player.shape = love.physics.newCircleShape(20)
   player.fixture = love.physics.newFixture(player.body, player.shape, 1)
-  player.fixture:setRestitution(1) 
+  player.fixture:setRestitution(1)
 
   function getBall(y)
     ball = {}
     ball.body = love.physics.newBody(world, math.random(0, 650), y, "kinematic")
-    ball.shape = love.physics.newCircleShape(25) 
-    ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1) 
+    ball.shape = love.physics.newCircleShape(25)
+    ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1)
     return ball
   end
 
@@ -27,6 +27,6 @@ function love.load()
   ball4 = getBall(-400)
   ball5 = getBall(-500)
 
-  love.graphics.setBackgroundColor(0, 0, 0) 
-  love.window.setMode(650, 650) 
+  love.graphics.setBackgroundColor(0, 0, 0)
+  love.window.setMode(650, 650)
 end
