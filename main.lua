@@ -2,6 +2,8 @@ math.randomseed(os.time())
 
 score = 0
 
+x = 1
+
 gameOver = false
 pauseGame = false
 tutorial = false

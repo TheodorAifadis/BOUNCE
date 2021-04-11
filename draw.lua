@@ -1,7 +1,7 @@
 function love.draw()
   if gameOver or tutorial or mainMenu == false then
-    love.graphics.print({greenFont, ("Score:")}, smallFont, 25, 50)
-    love.graphics.print({greenFont, (score)}, smallFont, 100, 50)
+    love.graphics.print({greenFont, ("Score:")}, smallFont, 25, 60)
+    love.graphics.print({greenFont, (score)}, smallFont, 100, 60)
   end
     
   if mainMenu == false and gameOver == false and pauseGame == false then
@@ -64,6 +64,8 @@ function love.draw()
   ballColor(ball1)
   ballColor(ball2)
   ballColor(ball3)
+  ballColor(ball4)
+  ballColor(ball5)
   
   love.graphics.setColor(1, 1, 1)
   love.graphics.circle("fill", player.body:getX(), player.body:getY(), player.shape:getRadius())
