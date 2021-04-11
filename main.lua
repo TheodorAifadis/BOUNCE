@@ -16,10 +16,9 @@ bigFont = love.graphics.newFont("assets/Stick-Regular.ttf", 100)
 smallFont = love.graphics.newFont("assets/Stick-Regular.ttf", 25)
 miniFont = love.graphics.newFont("assets/Stick-Regular.ttf", 15)
 
-music = love.audio.newSource("assets/elevator.mp3", "stream")
+music = love.audio.newSource("assets/bensound-house.mp3", "stream")
 music:setVolume(1)
-bounceSfx = love.audio.newSource("assets/bounce.mp3", "static")
-bounceSfx:setVolume(0.5)
+music:setLooping(true)
 
 load = require('load')
 update = require('update')

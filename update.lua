@@ -47,19 +47,10 @@ function love.update(dt)
     music:setVolume(0)
   end
 
-  function playSound(sound)
-    sound:play()
-    sound:setPitch(.85)
-  end
-
-  if checkCollission(player.fixture, ground.fixture, 5) then
-    playSound(bounceSfx)
-  end
-
   function respawnBall(ball)
     if checkCollission(ground.fixture, ball.fixture, 1) then
       ball.body.setY(ball.body, -50)
-      ball.body.setX(ball.body, math.random(0, 650))
+      ball.body.setX(ball.body, love.math.random(0, 650))
     end
   end
 

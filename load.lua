@@ -1,6 +1,6 @@
 function love.load()
   love.physics.setMeter(64)
-  world = love.physics.newWorld(0, 8*64, true)
+  world = love.physics.newWorld(0, 33*64, true)
 
   ground = {}
   ground.body = love.physics.newBody(world, 650/2, 650-50/2)
@@ -15,13 +15,13 @@ function love.load()
 
   function getBall(y)
     ball = {}
-    ball.body = love.physics.newBody(world, math.random(0, 650), y, "kinematic")
+    ball.body = love.physics.newBody(world, love.math.random(0, 650), y, "kinematic")
     ball.shape = love.physics.newCircleShape(25)
     ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1)
     return ball
   end
 
-  ball1 = getBall(100)
+  ball1 = getBall(-100)
   ball2 = getBall(-200)
   ball3 = getBall(-300)
   ball4 = getBall(-400)

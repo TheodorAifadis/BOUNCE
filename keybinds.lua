@@ -1,4 +1,3 @@
--- om en knapp trycks ner så sker något
 function love.keypressed(k)
   if k == 'escape' then
     love.event.quit()
@@ -11,8 +10,5 @@ function love.keypressed(k)
   elseif k == 't' then
     tutorial = not tutorial
   elseif k == 'm' then
-    bounceSfx:setVolume(0)
-  elseif k == 'u' then
-    bounceSfx:setVolume(.5)
   end
 end

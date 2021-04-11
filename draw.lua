@@ -27,18 +27,12 @@ function love.draw()
   elseif tutorial == true then
     love.graphics.setColor(0, 1, 0)
     love.graphics.print({greenFont, ("BOUNCE")}, bigFont , 110, 130)
-    love.graphics.print({greenFont, ("T To Continue")}, smallFont , 145, 300)
-    love.graphics.rectangle('line', 139, 305, 30, 30)
-    love.graphics.print({greenFont, ("Esc To Exit")}, smallFont , 345, 300)
-    love.graphics.rectangle('line', 339, 305, 54, 30)
-    love.graphics.print({greenFont, ("R To Restart")}, smallFont , 145, 360)
-    love.graphics.rectangle('line', 139, 365, 30, 30)
-    love.graphics.print({greenFont, ("P To Pause")}, smallFont , 345, 360)
-    love.graphics.rectangle('line', 339, 365, 30, 30)
-    love.graphics.print({greenFont, ("M To Mute")}, smallFont , 145, 420)
-    love.graphics.rectangle('line', 139, 425, 35, 30)
-    love.graphics.print({greenFont, ("U To Unmute")}, smallFont , 345, 420)
-    love.graphics.rectangle('line', 339, 425, 30, 30)
+    love.graphics.print({greenFont, ("[T] To Continue")}, smallFont , 145, 300)
+    love.graphics.print({greenFont, ("[Esc] To Exit")}, smallFont , 345, 300)
+    love.graphics.print({greenFont, ("[R] To Restart")}, smallFont , 145, 360)
+    love.graphics.print({greenFont, ("[P] To Pause")}, smallFont , 345, 360)
+    love.graphics.print({greenFont, ("[M] To Mute")}, smallFont , 145, 420)
+    love.graphics.print({greenFont, ("[U] To Unmute")}, smallFont , 345, 420)
     love.graphics.print({greenFont, ("Arrows To Move Sideways")}, smallFont , 170, 479)
     return
   end
@@ -50,7 +44,7 @@ function love.draw()
   elseif score > 1500 and score < 2000 then
     love.graphics.print({greenFont, ("Epic!")}, smallFont , 50, 100)
   elseif score > 2000 then
-    love.graphics.draw(image, 10, 100, 0, 0.2, 0.2)
+    love.graphics.draw(image, 240, 70, 0, 0.2, 0.2)
   end
 
   love.graphics.setColor(0, 1, 0)
