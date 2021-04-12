@@ -25,4 +25,4 @@ BOUNCE!
 - Stick-Regular från fonts.google.com
 
 ### Bild
-- "True Jedi" från okänd källa
+- "True Jedi" från google bilder
