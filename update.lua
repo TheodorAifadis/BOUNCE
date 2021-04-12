@@ -30,7 +30,7 @@ function love.update(dt)
   end
 
   function endGame(ball)
-    if checkCollission(player.fixture, ball.fixture, 5) then
+    if checkCollission(player.fixture, ball.fixture, 10) then
       gameOver = true
       if(tonumber(highscore) < score) then -- om man får mer poäng än highscore så ersätts highscore värdet
         highscore = score                  -- med det poäng man precis fått
@@ -57,8 +57,8 @@ function love.update(dt)
   end
 
   function respawnBall(ball)
-    if checkCollission(ground.fixture, ball.fixture, 1) then
-      ball.body.setY(ball.body, -50)
+    if checkCollission(ground.fixture, ball.fixture, 10) then
+      ball.body.setY(ball.body, -10)
       ball.body.setX(ball.body, love.math.random(0, 650))
     end
   end

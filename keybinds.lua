@@ -5,12 +5,13 @@ function love.keypressed(k)
     love.event.quit()
   elseif k == "r" then 
     love.event.quit("restart")
-  elseif k == 'p' then
-    pauseGame = not pauseGame 
   elseif k == 's' then
     mainMenu = not mainMenu
-  elseif k == 't' then
+  end
+
+  if gameOver == false and mainMenu == false and tutorial == false and k == 'p' then
+    pauseGame = not pauseGame 
+  elseif gameOver == false and mainMenu == false and pauseGame == false and k == 't' then
     tutorial = not tutorial
-  elseif k == 'm' then
   end
 end
