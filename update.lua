@@ -15,15 +15,6 @@ function love.update(dt)
 
   score = score + 1
 
-  --[[
-  if gameOver == true then
-    if (tonumber(highScore) < score) then
-        highScore = score
-        SAVE_HIGHSCORE(highScore)
-    end
-  end
-  --]]
-
   if love.keyboard.isDown("right") then
     player.body:applyForce(500, 0)
   elseif love.keyboard.isDown("left") then
@@ -41,6 +32,10 @@ function love.update(dt)
   function endGame(ball)
     if checkCollission(player.fixture, ball.fixture, 7) then
       gameOver = true
+      if(tonumber(highscore) < score) then
+        highscore = score
+        saveHighScore(highscore)
+      end
     end
   end
 

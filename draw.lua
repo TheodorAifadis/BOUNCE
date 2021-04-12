@@ -4,11 +4,10 @@ function love.draw()
     love.graphics.print({greenFont, (score)}, smallFont, 100, 60)
   end
 
-  --[[
   if gameOver == true then
-    love.graphics.print({greenFont, ("HIGH SCORE: "), smallFont, (" " .. highscore)}, 40, 60)
+    love.graphics.print({greenFont, ("Highscore:")}, smallFont, 250, 60)
+    love.graphics.print({greenFont, (highscore)}, smallFont, 380, 60)
   end
-  --]]
 
   if mainMenu == false and gameOver == false and pauseGame == false then
     love.graphics.print({greenFont, ("Press T For Tutorial")}, miniFont, 475, 50)

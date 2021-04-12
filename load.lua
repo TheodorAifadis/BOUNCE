@@ -2,8 +2,8 @@ function love.load()
   love.physics.setMeter(64)
   world = love.physics.newWorld(0, 33*64, true)
 
-  --highScore = LOAD_HIGHSCORE()
-
+  highscore = loadHighScore()
+  
   ground = {}
   ground.body = love.physics.newBody(world, 650/2, 650-50/2)
   ground.shape = love.physics.newRectangleShape(650, 50)

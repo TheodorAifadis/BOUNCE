@@ -1,7 +1,7 @@
 math.randomseed(os.time())
 
+highscore = 0
 score = 0
---highscore = 0
 
 x = 1
 
@@ -21,9 +21,9 @@ music = love.audio.newSource("assets/bensound-house.mp3", "stream")
 music:setVolume(1)
 music:setLooping(true)
 
-load = require('load')
-update = require('update')
-draw = require('draw')
-collision = require('collision')
-keybinds = require('keybinds')
---highScore = require('highscore')
+require('load')
+require('update')
+require('draw')
+require('collision')
+require('keybinds')
+require('highscore')

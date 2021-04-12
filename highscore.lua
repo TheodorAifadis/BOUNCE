@@ -1,14 +1,17 @@
-function LOAD_HIGHSCORE() 
+function loadHighScore()
+    
+    local highscore = love.filesystem.read("test.sav")
 
-    local highscore = love.filesystem.read("highscore.sav")
-
-    if(highscore == nil) then
+    if(highscore == nil)then
         highscore = 0
     end
 
     return highscore
+
 end
 
-function SAVE_HIGHSCORE(newHighScore)
-    love.filesystem.write("highscore.sav", newHighScore)
+function saveHighScore(newHighScore)
+
+    love.filesystem.write("data.sav", newHighScore)
+
 end
