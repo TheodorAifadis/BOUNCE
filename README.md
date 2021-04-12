@@ -1,6 +1,3 @@
 BOUNCE
 
-Todo:
-- spara-funktion 
-- användartester 
-- försöka fixa buggen, kan vara så att den inte beror på koden utan love.physics
+Undvik de röda fallande bollarna, överlev så länge som möjligt. ("Easter egg" vid 2000 poäng)

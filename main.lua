@@ -1,6 +1,7 @@
 math.randomseed(os.time())
 
 score = 0
+--highscore = 0
 
 x = 1
 
@@ -25,3 +26,4 @@ update = require('update')
 draw = require('draw')
 collision = require('collision')
 keybinds = require('keybinds')
+--highScore = require('highscore')
