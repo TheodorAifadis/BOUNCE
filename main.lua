@@ -1,3 +1,10 @@
+require('load')
+require('update')
+require('draw')
+require('collision')
+require('keybinds')
+require('highscore')
+
 math.randomseed(os.time())
 
 highscore = 0
@@ -23,11 +30,3 @@ music:setLooping(true)
 gameOverSound = love.audio.newSource("assets/gameover.wav", "stream")
 gameOverSound:setPitch(.4)
 levelSound = love.audio.newSource("assets/level-up.wav", "stream")
-
-
-require('load')
-require('update')
-require('draw')
-require('collision')
-require('keybinds')
-require('highscore')

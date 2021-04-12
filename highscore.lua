@@ -1,6 +1,6 @@
 function loadHighScore()
     
-    local highscore = love.filesystem.read("test.sav")
+    local highscore = love.filesystem.read("data.sav")
 
     if(highscore == nil)then
         highscore = 0
