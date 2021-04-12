@@ -5,7 +5,7 @@ BOUNCE!
 - Styr den studsande vita bollen
 - Undvik de röda fallande objekten
 - Överlev så länge som möjligt!
-> Easter egg vid 2000 poäng*
+> *Easter egg vid 2000 poäng*
 
 ## Kontroller
 - Styr spelaren med pilarna
