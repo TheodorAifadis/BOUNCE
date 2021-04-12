@@ -64,7 +64,7 @@ function love.update(dt)
 
     if checkCollission(ground.fixture, ball.fixture, 10) then
       ball.body.setY(ball.body, -10)
-      ball.body.setX(ball.body, love.math.random(0, 50))
+      ball.body.setX(ball.body, love.math.random(0, 650))
     end
     
   end
