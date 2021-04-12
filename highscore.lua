@@ -5,7 +5,7 @@ function loadHighScore() -- funktion som laddar highscore
     if(highscore == nil)then -- det börjar med nil för att det från början inte har ett värde
         highscore = 0
     end
-
+    
     return highscore
 
 end

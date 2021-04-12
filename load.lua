@@ -1,5 +1,7 @@
 function love.load()
+
   love.physics.setMeter(64)
+
   world = love.physics.newWorld(0, 33*64, true)
 
   highscore = loadHighScore()
@@ -31,4 +33,5 @@ function love.load()
 
   love.graphics.setBackgroundColor(0, 0, 0)
   love.window.setMode(650, 650)
+  
 end
