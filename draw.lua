@@ -32,13 +32,12 @@ function love.draw()
   elseif tutorial == true then
     love.graphics.setColor(0, 1, 0)
     love.graphics.print({greenFont, ("BOUNCE")}, bigFont , 110, 130)
-    love.graphics.print({greenFont, ("[T] To Continue")}, smallFont , 145, 300)
-    love.graphics.print({greenFont, ("[Esc] To Exit")}, smallFont , 345, 300)
-    love.graphics.print({greenFont, ("[R] To Restart")}, smallFont , 145, 360)
-    love.graphics.print({greenFont, ("[P] To Pause")}, smallFont , 345, 360)
-    love.graphics.print({greenFont, ("[M] To Mute")}, smallFont , 145, 420)
-    love.graphics.print({greenFont, ("[U] To Unmute")}, smallFont , 345, 420)
-    love.graphics.print({greenFont, ("Arrows To Move Sideways")}, smallFont , 170, 479)
+    love.graphics.print({greenFont, ("Avoid falling balls")}, smallFont , 220, 280)
+    love.graphics.print({greenFont, ("[T] To Continue")}, smallFont , 145, 340)
+    love.graphics.print({greenFont, ("[Esc] To Exit")}, smallFont , 345, 340)
+    love.graphics.print({greenFont, ("[R] To Restart")}, smallFont , 145, 400)
+    love.graphics.print({greenFont, ("[P] To Pause")}, smallFont , 345, 400)
+    love.graphics.print({greenFont, ("Arrows To Move Sideways")}, smallFont , 170, 460)
     return
   end
 
