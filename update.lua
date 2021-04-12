@@ -49,6 +49,11 @@ function love.update(dt)
     music:play()
   elseif gameOver == true then
     music:setVolume(0)
+    gameOverSound:play()
+  end
+
+  if score == 500 or score == 1000 or score == 1500 or score == 2000 then
+    levelSound:play() 
   end
 
   function respawnBall(ball)
