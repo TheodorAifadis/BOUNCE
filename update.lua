@@ -1,9 +1,11 @@
 function love.update(dt)
-  if gameOver or pauseGame or tutorial or mainMenu then
-    return
+  if gameOver or pauseGame or tutorial or mainMenu then -- det här måste stå ovanför world:update(dt) för att
+    return                                              -- dess funktion ska fungera, spelet tar slut, pausas
   end
 
   world:update(dt)
+
+  score = score + 1
 
   ball1.body:setLinearVelocity(0, 250 * x)
   ball2.body:setLinearVelocity(0, 250 * x)
@@ -12,8 +14,6 @@ function love.update(dt)
   ball5.body:setLinearVelocity(0, 250 * x)
 
   x = x + 0.0005
-
-  score = score + 1
 
   if love.keyboard.isDown("right") then
     player.body:applyForce(500, 0)
@@ -30,10 +30,10 @@ function love.update(dt)
   end
 
   function endGame(ball)
-    if checkCollission(player.fixture, ball.fixture, 7) then
+    if checkCollission(player.fixture, ball.fixture, 5) then
       gameOver = true
-      if(tonumber(highscore) < score) then
-        highscore = score
+      if(tonumber(highscore) < score) then -- om man får mer poäng än highscore så ersätts highscore värdet
+        highscore = score                  -- med det poäng man precis fått
         saveHighScore(highscore)
       end
     end

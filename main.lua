@@ -7,8 +7,8 @@ require('highscore')
 
 math.randomseed(os.time())
 
-highscore = 0
 score = 0
+highscore = 0
 
 x = 1
 
@@ -16,8 +16,6 @@ gameOver = false
 pauseGame = false
 tutorial = false
 mainMenu = true
-
-image = love.graphics.newImage("assets/true-jedi.png")
 
 greenFont = {0, 1, 0, 1}
 bigFont = love.graphics.newFont("assets/Stick-Regular.ttf", 100)
@@ -30,3 +28,6 @@ music:setLooping(true)
 gameOverSound = love.audio.newSource("assets/gameover.wav", "stream")
 gameOverSound:setPitch(.4)
 levelSound = love.audio.newSource("assets/level-up.wav", "stream")
+levelSound:setPitch(.8)
+
+image = love.graphics.newImage("assets/true-jedi.png")
