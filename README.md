@@ -1,5 +1,25 @@
-BOUNCE
+# BOUNCE
 
-Undvik de röda fallande bollarna, överlev så länge som möjligt. ("Easter egg" vid 2000 poäng)
+## Instruktioner
+BOUNCE!, styr den studsande vita bollen, undvik de röda fallande objekten och överlev så länge som möjligt!
+** Easter egg vid 2000 poäng
 
-![Screenshot:](http://url/to/Screenshot 2021-04-12 153127.png)
+## Kontroller
+Styr spelaren med pilarna
+Starta spelet med S
+Stäng av spelet med Esc
+Starta om spelet med R
+Pausa spelet med P
+Se tutorial med T
+
+## Tillgångar
+
+### Musik
+"House" från bensound.com
+Musik utan upphovsrätt
+
+### Font
+Stick-Regular från fonts.google.com
+
+### Bild
+"True Jedi" från okänd källa, google
