@@ -19,7 +19,6 @@ BOUNCE!
 
 ### Musik
 - "House" från bensound.com
-- Musik utan upphovsrätt
 
 ### Font
 - Stick-Regular från fonts.google.com
